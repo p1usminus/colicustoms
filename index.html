@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Coli - Custom Smilies</title>
+	<style>
+	#body {
+		background-color: #e2e2e2;
+	}
+	
+	#header {
+		background-color: #1e314c;
+		padding: 0.5em;
+		display: block;
+		width: 30%;
+		margin: auto;
+		text-align: center;
+		color: white;
+	}
+	
+	#imageContainer {
+		width: 90%;
+		margin: auto;
+	}
+	
+	#imageContainer img {
+		margin: 0 4px;
+		display: inline-block;
+		max-width: 160px;
+		max-height: 160px;
+		width: auto;
+		height: auto;
+	}
+	
+	#imageContainer img:hover {
+		cursor: pointer;
+		background-color: #224a81;
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	</style>
+  </head>
+  <body>
+	<div id="header">
+	<h1><a href="https://www.thecoli.com/">The <span style="color:#e2e2e2,">Coli<span></a></h1>
+	<h2>Custom Smilies</h2></div>
+	<div id="imageContainer"></div>
+	
+	<script type="text/javascript">
+		let imgs = [];
+		const container = document.getElementById('imageContainer');
+		const docFrag = document.createDocumentFragment();
+		
+		async function fetchImages(url) {
+			const response = await fetch(url);
+			imgs = await response.text().then(text => text.split(/\r?\n/));
+			addData(imgs);
+			
+			loadImages();
+		};
+		
+		function addData(obj) {
+			imgs.push(obj);
+		};
+		
+		function loadImages() {
+			imgs.pop().forEach(function(cur, index, arr) {
+				var img = document.createElement('img');
+				img.src = cur;
+				console.log(cur);
+				//img.setAttribute("onclick", navigator.clipboard.writeText(this.src));
+				img.addEventListener("click", event => {
+					navigator.clipboard.writeText("[IMG]"+cur+"[/IMG]");
+				});
+				docFrag.appendChild(img);
+			});
+
+			container.appendChild(docFrag);
+		};
+
+		fetchImages('https://raw.githubusercontent.com/p1usminus/colicustoms/main/images.txt');
+	</script>
+  </body>
+</html>
