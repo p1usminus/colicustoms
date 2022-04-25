@@ -7,7 +7,7 @@
     <title>The Coli - Custom Smilies</title>
 	<style>
 	body {
-		background-color: #e2e2e2; /* e2 is a little bright */
+		background-color: #e2e2e2; /* ac is darker */
 	}
 	
 	#header {
@@ -48,12 +48,17 @@
 	h1 {
 		font-size: 5em;
 	}
+	
+	h2 {
+		font-size: 2em;
+	}
 	</style>
   </head>
   <body>
 	<div id="header">
-	<h1><a href="https://www.thecoli.com/">The <span style="color:#acacac;">Coli<span></a></h1>
-	<h2>Custom Smilies</h2></div>
+		<h1><a href="https://www.thecoli.com/" title="Go to Forums">The <span style="color:#acacac;">Coli<span></a></h1>
+		<h2>Custom Smilies</h2>
+	</div>
 	<div id="imageContainer"></div>
 	
 	<script type="text/javascript">
@@ -64,7 +69,7 @@
 		async function fetchImages(url) {
 			const response = await fetch(url);
 			imgs = await response.text().then(text => text.split(/\r?\n/));
-			addData(imgs);
+			//addData(imgs);
 			
 			loadImages();
 		};
@@ -74,7 +79,7 @@
 		};
 		
 		function loadImages() {
-			imgs.pop().forEach(function(cur, index, arr) {
+			imgs.forEach(function(cur, index, arr) {
 				var img = document.createElement('img');
 				img.src = cur;
 				console.log(cur);
