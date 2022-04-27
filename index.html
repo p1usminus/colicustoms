@@ -82,8 +82,6 @@
 			imgs.forEach(function(cur, index, arr) {
 				var img = document.createElement('img');
 				img.src = cur;
-				console.log(cur);
-				//img.setAttribute("onclick", navigator.clipboard.writeText(this.src));
 				img.addEventListener("click", event => {
 					navigator.clipboard.writeText("[IMG]"+cur+"[/IMG]");
 				});
